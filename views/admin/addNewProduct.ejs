@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Product</title>
+    <link rel="stylesheet" href="/css/addNewProduct.css">
+</head>
+
+<body>
+    <div class="container">
+        <% if(editMode) { %>
+            <form action="/admin/update-product" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <input type="hidden" value="<%= product._id %>" name="_id">
+                <div class="product__image">
+                    <div class="uploadOuter">
+                        <!-- <label for="uploadFile" class="btn btn-primary">Upload Image</label>
+                        <strong>OR</strong> -->
+                        <span class="dragBox" id="preview">
+                            Darg and Drop image here
+                            <input type="file" 
+                                name="image"
+                                id="uploadFile"/>
+                        </span>
+                    </div>
+                </div>
+        
+                <div class="product__details">
+                    <% if(errorMessage) { %>
+                        <div class="errorBox" style="color: red;"><%= errorMessage %></div>
+                    <% } %>
+                        <div class="title">
+                            <input type="text" placeholder="Title" name="title" 
+                            <% if(oldInput.title) { %> value="<%= oldInput.title %>" <% } %>
+                            <% if(editMode && !errorMessage) { %> value="<%= product.title %>" <% } %>
+                            >
+                        </div>
+                        <div class="price">
+                            <input type="text" placeholder="price" name="price" 
+                            <% if(oldInput.price) { %> value="<%= oldInput.price %>" <% } %>
+                            <% if(editMode && !errorMessage) { %> value="<%= product.price %>" <% } %>
+                            >
+
+                            <input type="text" placeholder="MRP" name="mrp" 
+                            <% if(oldInput.mrp) { %> value="<%= oldInput.mrp %>" <% } %>
+                            <% if(editMode && !errorMessage) { %> value="<%= product.mrp %>" <% } %>
+                            >
+                        </div>
+                        <div class="des">
+                            <% if(oldInput.description) { %> 
+                            <textarea name="description" id="" placeholder="Description"><%= oldInput.description %></textarea>
+                            <% } %>
+                            <% if(editMode && !errorMessage) { %>
+                                <textarea name="description" id="" placeholder="Description"><%= product.description %></textarea>     
+                            <% } %>
+                        </div>
+                        <div class="spes" id="speslist">
+                            <h2>Specifications (upto 5)</h2>
+                            
+                                <% product.specifications.forEach( (element , index) => { %>
+                                    <div class="spasItem">
+                                        <input type="text" placeholder="Specifications" name="specItem<%= index+1 %>" value="<%= element %>">
+                                    </div>
+                                <% });%>
+                            
+                        </div>
+                        <!-- <div class="catagory">
+                            <h2>Catagory</h2>
+                            <select>
+                                <option value="food">Food</option>
+                                <option value="cosmetic">Cosmetic</option>
+                                <option value="stastionery">Stastionery</option>
+                                <option value="food">Toy</option>
+                            </select>
+                        </div> -->
+                        <div class="submit">
+                            <input type="submit" value="UPDATE PRODUCT">
+                        </div>
+                </div>
+            </form>
+        <% } else { %>    
+            <form action="/admin/add-new-product" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <div class="product__image">
+                    <div class="uploadOuter">
+                        <!-- <label for="uploadFile" class="btn btn-primary">Upload Image</label>
+                        <strong>OR</strong> -->
+                        <span class="dragBox" id="preview">
+                            Darg and Drop image here
+                            <input type="file" 
+                            name="image"
+                            id="uploadFile" />
+                        </span>
+                    </div>
+                </div>
+        
+                <div class="product__details">
+                    <% if(errorMessage) { %>
+                        <div class="errorBox" style="color: red;"><%= errorMessage %></div>
+                        <% } %>
+                        <div class="title">
+                            <input type="text" placeholder="Title" name="title" <% if(oldInput.title) { %> value="<%= oldInput.title %>" <% } %>>
+                        </div>
+                        <div class="price">
+                            <input type="text" placeholder="price" name="price" <% if(oldInput.price) { %> value="<%= oldInput.price %>" <% } %>>
+                            <input type="text" placeholder="MRP" name="mrp" <% if(oldInput.mrp) { %> value="<%= oldInput.mrp %>" <% } %>>
+                        </div>
+                        <div class="des">
+                            <textarea name="description" id="" placeholder="Description"><% if(oldInput.description) { %> <%= oldInput.description %> <% } %></textarea>
+                        </div>
+                        <div class="spes" id="speslist">
+                            <h2>Specifications (upto 5)</h2>
+                            <div class="spasItem">
+                                <input type="text" placeholder="Specifications" name="specItem1" <% if(oldInput.specItem1) { %> value="<%= oldInput.specItem1 %>" <% } %>>
+                            </div>
+                        </div>
+                        <div class="addBtn" id="btn">
+                            <button type="button" onclick="addSpecs()">Add Specifications</button>
+                        </div>
+                        <!-- <div class="catagory">
+                            <h2>Catagory</h2>
+                            <select>
+                                <option value="food">Food</option>
+                                <option value="cosmetic">Cosmetic</option>
+                                <option value="stastionery">Stastionery</option>
+                                <option value="food">Toy</option>
+                            </select>
+                        </div> -->
+                        <div class="submit">
+                            <input type="submit" value="ADD NEW PRODUCT">
+                        </div>
+                </div>
+            </form>
+        <% } %>    
+        
+    </div>
+    <script src="/js/addNewProduct.js"></script>
+</body>
+
+</html>

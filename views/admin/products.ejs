@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/productList.css">
+</head>
+<body>
+    <%- include('../includes/nav.ejs') %>
+
+    <% if(products.length > 0) { %>
+        <div class="productsList">
+            <div class="products">
+
+                <% products.forEach( product => { %>
+                    <div class="productItem">
+                        <div class="productImage">
+                            <img src="\<%= product.imageUrl %>" alt="<%= product.title %>">
+                        </div>
+                        <div class="productInfo">
+                            <h2><%= product.title %></h2>
+                            <p>Price : <%= product.price %> <br> MRP : <%= product.mrp %></p>
+                            <div>
+                                <button class="blue"><a href="/admin/update-product/<%= product._id %>">EDIT</a></button>
+                                <button class="yellow"><a href="/admin/delete-product/<%= product._id %>">DELETE</a></button>
+                            </div>
+                        </div>
+                    </div>
+                <% }) %>
+                
+    
+                
+    
+                
+            </div>
+            
+        </div>
+    <% } else { %>
+        <h2 class="error_msg">No Products Found!!</h2>
+    <% } %>    
+    
+</body>
+</html>

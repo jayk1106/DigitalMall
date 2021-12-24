@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Reset Password</title>
+    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <style>
+        .inputbox i{
+            position: absolute;
+            right: 70px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="loginform">
+        <h2>Reset Password</h2>
+        <div class="formbox">
+            <% if(errorMessage) { %>
+            <div class="errorBox" style="color: red;"><%= errorMessage %></div>
+            <% } %>
+            <form method="POST" action="/reset" id="form">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <div class="inputbox">
+                    <input type="email" name="email" id="email" required placeholder="Enter Your Email">
+                </div>
+                <div class="inputbox">
+                    <input type="submit" value="Reset Password">
+                </div>
+            </form>
+        </div>
+
+        <p>Create a new account<a href="/signup">&nbsp;&nbsp;SignUp</a></p>
+    </div>
+
+</body>
+
+</html>

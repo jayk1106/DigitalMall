@@ -1,0 +1,68 @@
+<%- include('../includes/header.ejs') %>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        h1{
+            margin: 75px 15px;
+        }
+        .cartItems{
+            min-height: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding-top: 70px;
+        }
+        .cartItems .cartItem{
+            padding: 15px;
+            background-color: rgb(231, 231, 231);
+            margin: 10px 0;
+            border-radius: 3px 3px 10px rgba(231, 231, 231 , 0.9);
+        }
+        button{
+            outline: none;
+            background-color: rgb(200, 49, 49);
+            color: #fff;
+            border: none;
+            padding: 5px;
+            cursor: pointer;
+        }
+        .callToAction{
+            font-size: large;
+        }
+        .callToAction button{
+            width: 200px;
+            height: 40px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <%- include('../includes/nav.ejs') %>
+    <% let total = 0 %>
+    <%  if(cartItems.length > 0) { %>
+        <div class="cartItems">
+        <% cartItems.forEach( cartItem => {   total += cartItem.productId.price * cartItem.qty  %>
+            <div class="cartItem">
+                <h2><%= cartItem.productId.title %></h2>
+                <h3>Price : <%= cartItem.productId.price %>  Qty : <%= cartItem.qty %></h3>
+                <form action="/remove-from-cart" method="post">
+                    <input type="hidden" name="productId" value="<%= cartItem.productId._id %>">
+                    <button type="submit">Remove</button>
+                </form>
+            </div>
+            <div class="callToAction">
+                <p>Total : <b> ₹ <%= total %> </b></p>
+                <form action="/order" method="post">
+                    <button type="submit">ORDER NOW</button>
+                </form>
+            </div>
+        <% }) %>
+    </div>
+    <% } else { %>    
+        <h1>Your Cart is Empty..</h1>
+    <% } %>    
+    
+        
+    
+</body>
+</html>

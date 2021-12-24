@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="/css/product.css">
+</head>
+
+
+<body>
+            <% if(product) { %>
+                <div class="product">
+                    <div class="pro_image">
+                        <img src="\<%= product.imageUrl %>" alt="<%= product.title %>">
+                    </div>
+                    <div class="pro_info">
+                        <h1 class="rheading"><%= product.title %></h1>
+                        <p><b>Price</b> : <%= product.price %></p>
+                        <p><b>MRP</b> : <%= product.mrp %></p>
+                        <h5 class="green">In stock.</h5>
+                        <h2>Description</h2>
+                        <p><%= product.description %></p>
+                        <div class="specificaton">
+                            <h2>Specification</h2>
+                            <ul>
+                                <% product.specifications.forEach(element => { %>
+                                    <li><%= element %></li>
+                                <% }) %>
+                            </ul>
+                        </div>
+                        
+    
+                        <div class="buttons">
+                            <button class="buynow">Buy Now</button>
+                            <form method="post" action="/cart">
+                                <input type="hidden" name="productId" value="<%= product._id %>">
+                                <button class="addcart" type="submit">Add to Cart</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+    
+                <h2 class="rheading">Related products</h2>
+                <div class="related_pro">
+                            
+                            <div class="rpro">
+                                <img src="https://thumbs.dreamstime.com/b/example-red-tag-example-red-square-price-tag-117502755.jpg" alt="">
+                                <h5>Example</h5>
+                                <button><a href="">SHOW</a></button>
+                            </div>
+                    
+                      
+                </div>
+            <% } else { %>    
+                <h1>Something Wrong.. Try Again</h1>
+            <% } %>    
+
+    
+   <footer>
+        <h2>ORDER ORGANIC</h2>
+        <p class="bo">© 2020 OrderOrganic.com<br>
+        <a href="contact.php">Contact Us</a> <a href="">Disclaimer</a><br>
+        </p>
+    </footer>
+
+</body>
+
+</html>

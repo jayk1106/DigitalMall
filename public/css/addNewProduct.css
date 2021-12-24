@@ -1,0 +1,145 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container form{
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center; 
+}
+.container .product__image .uploadOuter {
+  text-align: center;
+  padding: 20px;
+}
+.container .product__image .dragBox {
+  width: 400px;
+  height: 350px;
+  margin: 0 auto;
+  position: relative;
+  text-align: center;
+  font-weight: bold;
+  line-height: 95px;
+  color: #999;
+  border: 2px dashed #ccc;
+  display: inline-block;
+  transition: transform 0.3s;
+}
+.container .product__image .dragBox input[type="file"] {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  opacity: 100;
+  top: 0;
+  left: 0;
+}
+.container .product__image .draging {
+  transform: scale(1.1);
+}
+.container .product__image #preview {
+  text-align: center;
+}
+.container .product__image #preview img {
+  max-width: 100%
+}
+.container .product__details{
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+.container .product__image {  
+  height: 100vh;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container .product__details div{
+  width: 80%;
+  margin: 20px 0;
+}
+input, textarea{
+  outline: none;
+  border: 2px solid #c6c6c6;
+}
+.title input , .spes input{
+  width: 100%;
+  height: 40px;
+}
+textarea{
+  height: 60px;
+  width: 100%;
+}
+input , textarea{
+  padding-left: 10px;
+  font-size: 18px;
+}
+
+.price{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.price input{
+  height: 40px;
+  width: 45%;
+}
+
+#speslist div{
+  width: 100%;
+  /* margin: 0 0 20px 0; */
+}
+.addBtn button{
+  height: 40px;
+  padding: 10px;
+  outline: none;
+  border: none;
+  box-shadow: 2px 2px 3px rgb(29, 116, 29);
+  color: #fff;
+  cursor: pointer;
+  background-color: rgb(40, 155, 40);
+}
+#btn{
+  margin: 0 0 20px 0;
+}
+.catagory select{
+  height: 40px;
+  max-width: 100%;
+  margin-top: 20px;
+  width: 200px;
+  /* box-shadow: 2px 2px 3px rgb(29, 116, 29);
+  color: #fff;
+  cursor: pointer;
+  background-color: rgb(40, 155, 40); */
+}
+.submit{
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.submit input{
+  height: 100%;
+  padding: 10px;
+  width: 100%;
+  max-width: 100%;
+  outline: none;
+  border: none;
+  box-shadow: 2px 2px 3px rgb(29, 116, 29);
+  color: #fff;
+  cursor: pointer;
+  background-color: rgb(40, 155, 40);
+}

@@ -1,0 +1,61 @@
+<%- include('../includes/header.ejs') %>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        h1{
+            margin: 75px 15px;
+        }
+        .cartItems{
+            min-height: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding-top: 70px;
+        }
+        .cartItems .orderCart {
+            padding: 20px ;
+            border: 2px solid red;
+            margin: 10px 0;
+        } 
+        .cartItems .cartItem{
+            padding: 15px;
+            background-color: rgb(231, 231, 231);
+            margin: 10px 0;
+            border-radius: 3px 3px 10px rgba(231, 231, 231 , 0.9);
+        }
+       
+    </style>
+</head>
+<body>
+    <%- include('../includes/nav.ejs') %>
+
+    <%  if(orders.length > 0) { %>
+
+        <div class="cartItems">
+
+        <% orders.forEach( order => {  %>
+
+            <div class="orderCart">
+                <%  order.products.forEach( p => { %>
+
+                    <div class="cartItem">
+                        <h2><%= p.product.title %></h2>
+                        <h3>Price : <%= p.product.price %>  Qty : <%= p.qty %></h3>
+                    </div>
+
+                <%  }) %>
+
+            </div>
+            
+            
+    
+        <% }) %>
+    </div>
+    <% } else { %>    
+        <h1>No Orders Found...</h1>
+    <% } %>    
+    
+        
+    
+</body>
+</html>

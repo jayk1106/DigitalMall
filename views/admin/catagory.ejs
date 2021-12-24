@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catagories</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/productList.css">
+</head>
+<body>
+    <%- include('../includes/nav.ejs') %>
+
+    <% if(catagories.length > 0) { %>
+        <div class="productsList">
+            <div class="products">
+
+                <% catagories.forEach( catagory => { %>
+                    <div class="productItem">
+                        <div class="productImage">
+                            <img src="\<%= catagory.imageUrl %>" alt="<%= catagory.name %>">
+                        </div>
+                        <div class="productInfo">
+                            <h2><%= catagory.name %></h2>
+                            <div>
+                                <button class="blue"><a href="/admin/update-catagory/<%= catagory._id %>">EDIT</a></button>
+                                <button class="yellow"><a href="/admin/delete-catagory/<%= catagory._id %>">DELETE</a></button>
+                            </div>
+                        </div>
+                    </div>
+                <% }) %>
+                
+    
+                
+    
+                
+            </div>
+            
+        </div>
+    <% } else { %>
+        <h2 class="error_msg">No Catagories Found!!</h2>
+    <% } %>    
+    
+</body>
+</html>
