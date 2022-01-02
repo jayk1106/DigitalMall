@@ -1,67 +1,87 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <link rel="stylesheet" href="/css/product.css">
+<%- include('../includes/header.ejs') %>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+    .container{
+    background-color: #edf1f5;
+    margin-top:20px;
+}
+.card {
+    margin-bottom: 30px;
+}
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0 solid transparent;
+    border-radius: 0;
+}
+.card .card-subtitle {
+    font-weight: 300;
+    margin-bottom: 10px;
+    color: #8898aa;
+}
+.card img {
+    width: 400px;
+    height: 400px;
+}
+    </style>
 </head>
 
 
 <body>
+    <%- include('../includes/nav.ejs') %>
             <% if(product) { %>
-                <div class="product">
-                    <div class="pro_image">
-                        <img src="\<%= product.imageUrl %>" alt="<%= product.title %>">
-                    </div>
-                    <div class="pro_info">
-                        <h1 class="rheading"><%= product.title %></h1>
-                        <p><b>Price</b> : <%= product.price %></p>
-                        <p><b>MRP</b> : <%= product.mrp %></p>
-                        <h5 class="green">In stock.</h5>
-                        <h2>Description</h2>
-                        <p><%= product.description %></p>
-                        <div class="specificaton">
-                            <h2>Specification</h2>
-                            <ul>
-                                <% product.specifications.forEach(element => { %>
-                                    <li><%= element %></li>
-                                <% }) %>
-                            </ul>
-                        </div>
-                        
-    
-                        <div class="buttons">
-                            <button class="buynow">Buy Now</button>
-                            <form method="post" action="/cart">
-                                <input type="hidden" name="productId" value="<%= product._id %>">
-                                <button class="addcart" type="submit">Add to Cart</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-    
-                <h2 class="rheading">Related products</h2>
-                <div class="related_pro">
-                            
-                            <div class="rpro">
-                                <img src="https://thumbs.dreamstime.com/b/example-red-tag-example-red-square-price-tag-117502755.jpg" alt="">
-                                <h5>Example</h5>
-                                <button><a href="">SHOW</a></button>
+                
+                <div class="container">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title"><%= product.title %></h3>
+                            <div class="row">
+                                <div class="col-lg-5 col-md-5 col-sm-6">
+                                    <div class="white-box text-center"><img src="\<%= product.imageUrl %>" class="img-responsive" alt="\<%= product.title %>"></div>
+                                </div>
+                                <div class="col-lg-7 col-md-7 col-sm-6">
+                                    <h4 class="box-title mt-5">Product description</h4>
+                                    <p><%= product.description %></p>
+                                    <h2 class="mt-5">
+                                        ₹<%= product.price %><small class="text-success">(<%= product.mrp %>)</small>
+                                    </h2>
+                                    <form action="/cart" method="post">
+                                        <input type="hidden" name="productId" value="<%= product._id %>">
+                                        <input type="hidden" name="_csrf" value="<%= csrfToken %>"> 
+                                        <button class="btn btn-primary btn-rounded">ADD TO CART</button>
+                                    </form>
+                                    <h3 class="box-title mt-5">Key Highlights</h3>
+                                    <ul class="list-unstyled">
+                                        <% product.specifications.forEach(element => { %>
+                                            <li><li><i class="fa fa-check text-success"></i> <%= element %></li></li>
+                                        <% }) %>
+                                    </ul>
+                                </div>
+                                
                             </div>
-                    
-                      
+                        </div>
+                    </div>
                 </div>
+    
+
+
+
             <% } else { %>    
                 <h1>Something Wrong.. Try Again</h1>
             <% } %>    
-
     
-   <footer>
-        <h2>ORDER ORGANIC</h2>
-        <p class="bo">© 2020 OrderOrganic.com<br>
-        <a href="contact.php">Contact Us</a> <a href="">Disclaimer</a><br>
-        </p>
-    </footer>
+            <footer class="page-footer font-small">
+                <div class="footer-copyright text-center py-3">© 2022 Copyright: digitalMall
+                </div>  
+            </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 </body>
 
 </html>

@@ -1,143 +1,204 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add New Product</title>
-    <link rel="stylesheet" href="/css/addNewProduct.css">
+<%- include('../includes/header.ejs') %>
 </head>
 
-<body>
-    <div class="container">
-        <% if(editMode) { %>
-            <form action="/admin/update-product" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                <input type="hidden" value="<%= product._id %>" name="_id">
-                <div class="product__image">
-                    <div class="uploadOuter">
-                        <!-- <label for="uploadFile" class="btn btn-primary">Upload Image</label>
-                        <strong>OR</strong> -->
-                        <span class="dragBox" id="preview">
-                            Darg and Drop image here
-                            <input type="file" 
-                                name="image"
-                                id="uploadFile"/>
-                        </span>
-                    </div>
-                </div>
-        
-                <div class="product__details">
-                    <% if(errorMessage) { %>
-                        <div class="errorBox" style="color: red;"><%= errorMessage %></div>
-                    <% } %>
-                        <div class="title">
-                            <input type="text" placeholder="Title" name="title" 
-                            <% if(oldInput.title) { %> value="<%= oldInput.title %>" <% } %>
-                            <% if(editMode && !errorMessage) { %> value="<%= product.title %>" <% } %>
-                            >
-                        </div>
-                        <div class="price">
-                            <input type="text" placeholder="price" name="price" 
-                            <% if(oldInput.price) { %> value="<%= oldInput.price %>" <% } %>
-                            <% if(editMode && !errorMessage) { %> value="<%= product.price %>" <% } %>
-                            >
+<body> 
+    <%- include('../includes/nav.ejs') %>
+    <div class="container my-3">
 
-                            <input type="text" placeholder="MRP" name="mrp" 
-                            <% if(oldInput.mrp) { %> value="<%= oldInput.mrp %>" <% } %>
-                            <% if(editMode && !errorMessage) { %> value="<%= product.mrp %>" <% } %>
-                            >
-                        </div>
-                        <div class="des">
-                            <% if(oldInput.description) { %> 
-                            <textarea name="description" id="" placeholder="Description"><%= oldInput.description %></textarea>
-                            <% } %>
-                            <% if(editMode && !errorMessage) { %>
-                                <textarea name="description" id="" placeholder="Description"><%= product.description %></textarea>     
-                            <% } %>
-                        </div>
-                        <div class="spes" id="speslist">
-                            <h2>Specifications (upto 5)</h2>
-                            
-                                <% product.specifications.forEach( (element , index) => { %>
-                                    <div class="spasItem">
-                                        <input type="text" placeholder="Specifications" name="specItem<%= index+1 %>" value="<%= element %>">
-                                    </div>
-                                <% });%>
-                            
-                        </div>
-                        <!-- <div class="catagory">
-                            <h2>Catagory</h2>
-                            <select>
-                                <option value="food">Food</option>
-                                <option value="cosmetic">Cosmetic</option>
-                                <option value="stastionery">Stastionery</option>
-                                <option value="food">Toy</option>
-                            </select>
-                        </div> -->
-                        <div class="submit">
-                            <input type="submit" value="UPDATE PRODUCT">
-                        </div>
+        <% if(editMode) { %>
+                <h1>Update Product</h1>
+                <div class="text-danger my-2" style="height: 20px;">
+                    <% if(errorMessage) { %>
+                        <%= errorMessage %>
+                    <% } %>    
                 </div>
-            </form>
-        <% } else { %>    
+                <form action="/admin/update-product" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    <input type="hidden" value="<%= product._id %>" name="_id">
+                    <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" class="form-control" id="title" name="title" 
+                    <% if(oldInput.title) { %> value="<%= oldInput.title %>" <% } %>
+                    <% if(editMode && !errorMessage) { %> value="<%= product.title %>" <% } %>
+                    >
+                    </div>
+                    <div class="mb-3">
+                    <label for="price" class="form-label">Price</label>
+                    <input type="number" class="form-control" id="price" name="price" 
+                    <% if(oldInput.price) { %> value="<%= oldInput.price %>" <% } %>
+                    <% if(editMode && !errorMessage) { %> value="<%= product.price %>" <% } %>
+                    >
+                    </div>
+                    <div class="mb-3">
+                        <label for="mrp" class="form-label">MRP</label>
+                        <input type="number" class="form-control" id="mrp" name="mrp" 
+                        <% if(oldInput.mrp) { %> value="<%= oldInput.mrp %>" <% } %>
+                        <% if(editMode && !errorMessage) { %> value="<%= product.mrp %>" <% } %>
+                        >
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="qty" class="form-label">Quantity</label>
+                        <input type="number" class="form-control" id="qty" name="quantity" 
+                        <% if(oldInput.quantity) { %> value="<%= oldInput.quantity %>" <% } %>
+                        <% if(editMode && !errorMessage) { %> value="<%= product.quantity %>" <% } %>
+                        >
+                    </div>
+
+                    <div class="mb-3"> 
+                        <% if(oldInput.description) { %> 
+                            <label for="description" class="form-label">Description</label>
+                            <textarea class="form-control" id="description" name="description"><%= oldInput.description %></textarea>
+                        <% } %>
+                        <% if(editMode && !errorMessage) { %>
+                            <label for="description" class="form-label">Description</label>
+                            <textarea class="form-control" id="description" name="description"><%= product.description %></textarea>
+                        <% } %>
+                    </div>
+
+                    <input type="hidden" name="sIndex" value="<%= product.specifications.length %>" id="sIndex">
+
+                    <div class="specidication" id="speslist">
+                        <h3>Specifications (upto 5)</h3>
+                        <% product.specifications.forEach( (element , index) => { %>
+                            <div class="mb-3">
+                                <input type="text" placeholder="Specifications" name="specItem<%= index+1 %>" class="form-control my-2" value="<%= element %>">
+                            </div> 
+                        <% });%>
+
+                        
+                         
+                    </div>
+                    <div id="btn">
+                        <button class="btn btn-primary my-2" type="button" onclick="addSpecs()">Add Specifications</button>
+                    </div>
+
+
+                    <div class="mb-3 my-2">
+                        <% if(catagories.length > 0 ) { %>
+                            <label for="select" class="form-label" >Select Category</label>
+                            <select class="form-select" aria-label="Default select example" id="select" name="category">   
+                                <% catagories.forEach( category => { %>
+                                    <% if( oldInput.category && (oldInput.category.toString() === category._id.toString())) {%>
+                                        <option value="<%= category._id %>" selected>
+                                            <%= category.name %>
+                                       </option>
+                                    <% }else if(editMode && !errorMessage && (product.category.toString() === category._id.toString())) {%>    
+                                        <option value="<%= category._id %>" selected>
+                                            <%= category.name %>
+                                        </option>
+                                    <% } else {%>   
+                                        <option value="<%= category._id %>">
+                                            <%= category.name %>
+                                        </option>
+                                    <%} %>    
+                                    
+                                <% }) %>
+                            </select>
+                        <% } %>
+                    </div>
+
+
+
+
+                    <div class="mb-3 my-2">
+                        <label for="image" class="form-label" >Image</label>
+                        <input type="file" class="form-control" id="image" name="image">
+                    </div>
+                    <button type="submit" class="btn btn-primary my-2">UPDATE PRODUCT</button>
+                </form>
+        <% } else { %>
+            <h1>Add New Product</h1>
+            <div class="text-danger my-2" style="height: 20px;">
+                <% if(errorMessage) { %>
+                    <%= errorMessage %>
+                <% } %> 
+            </div>
+            
             <form action="/admin/add-new-product" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                <div class="product__image">
-                    <div class="uploadOuter">
-                        <!-- <label for="uploadFile" class="btn btn-primary">Upload Image</label>
-                        <strong>OR</strong> -->
-                        <span class="dragBox" id="preview">
-                            Darg and Drop image here
-                            <input type="file" 
-                            name="image"
-                            id="uploadFile" />
-                        </span>
-                    </div>
+                <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" class="form-control" id="title" name="title" <% if(oldInput.title) { %> value="<%= oldInput.title %>" <% } %> >
                 </div>
-        
-                <div class="product__details">
-                    <% if(errorMessage) { %>
-                        <div class="errorBox" style="color: red;"><%= errorMessage %></div>
-                        <% } %>
-                        <div class="title">
-                            <input type="text" placeholder="Title" name="title" <% if(oldInput.title) { %> value="<%= oldInput.title %>" <% } %>>
-                        </div>
-                        <div class="price">
-                            <input type="text" placeholder="price" name="price" <% if(oldInput.price) { %> value="<%= oldInput.price %>" <% } %>>
-                            <input type="text" placeholder="MRP" name="mrp" <% if(oldInput.mrp) { %> value="<%= oldInput.mrp %>" <% } %>>
-                        </div>
-                        <div class="des">
-                            <textarea name="description" id="" placeholder="Description"><% if(oldInput.description) { %> <%= oldInput.description %> <% } %></textarea>
-                        </div>
-                        <div class="spes" id="speslist">
-                            <h2>Specifications (upto 5)</h2>
-                            <div class="spasItem">
-                                <input type="text" placeholder="Specifications" name="specItem1" <% if(oldInput.specItem1) { %> value="<%= oldInput.specItem1 %>" <% } %>>
-                            </div>
-                        </div>
-                        <div class="addBtn" id="btn">
-                            <button type="button" onclick="addSpecs()">Add Specifications</button>
-                        </div>
-                        <!-- <div class="catagory">
-                            <h2>Catagory</h2>
-                            <select>
-                                <option value="food">Food</option>
-                                <option value="cosmetic">Cosmetic</option>
-                                <option value="stastionery">Stastionery</option>
-                                <option value="food">Toy</option>
-                            </select>
-                        </div> -->
-                        <div class="submit">
-                            <input type="submit" value="ADD NEW PRODUCT">
-                        </div>
+                <div class="mb-3">
+                <label for="price" class="form-label">Price</label>
+                <input type="number" class="form-control" id="price" name="price" <% if(oldInput.price) { %> value="<%= oldInput.price %>" <% } %>>
                 </div>
+                <div class="mb-3">
+                    <label for="mrp" class="form-label">MRP</label>
+                    <input type="number" class="form-control" id="mrp" name="mrp" <% if(oldInput.mrp) { %> value="<%= oldInput.mrp %>" <% } %>>
+                </div>
+                <div class="mb-3">
+                    <label for="qty" class="form-label">Quantity</label>
+                    <input type="number" class="form-control" id="qty" name="quantity" <% if(oldInput.quantity) { %> value="<%= oldInput.quantity %>" <% } %>>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea class="form-control" id="description" name="description"><% if(oldInput.description) { %> <%= oldInput.description %> <% } %></textarea>
+                </div>
+
+                <input type="hidden" name="sIndex" value="1" id="sIndex">
+                <div class="specidication" id="speslist">
+                    <h3>Specifications (upto 5)</h3>
+                    <div class="mb-3">
+                        <input type="text" placeholder="Specifications" name="specItem1" class="form-control my-2" <% if(oldInput.specItem1) { %> value="<%= oldInput.specItem1 %>" <% } %>>
+                    </div>  
+                </div>
+                <div id="btn">
+                    <button class="btn btn-primary my-2" type="button" onclick="addSpecs()">Add Specifications</button>
+                </div>
+                <div class="mb-3 my-2">
+                    <% if(catagories.length > 0 ) { %>
+                        <label for="select" class="form-label" >Select Category</label>
+                        <select class="form-select" aria-label="Default select example" id="select" name="category">   
+                            <% catagories.forEach( category => { %>
+                                <% if( oldInput.category && (oldInput.category.toString() === category._id.toString())) {%>
+                                    <option value="<%= category._id %>" selected>
+                                        <%= category.name %>
+                                   </option>
+                                <%}else{%>    
+                                    <option value="<%= category._id %>">
+                                        <%= category.name %>
+                                    </option>
+                                <% } %>   
+                                
+                            <% }) %>
+                        </select>
+                    <% } %>
+                </div>    
+                <div class="mb-3 my-2">
+                    <label for="image" class="form-label" >Image</label>
+                    <input type="file" class="form-control" id="image" name="image">
+                </div>
+                <button type="submit" class="btn btn-primary my-2">ADD NEW PRODUCT</button>
             </form>
-        <% } %>    
+        <% } %>
         
     </div>
-    <script src="/js/addNewProduct.js"></script>
+    <footer class="page-footer font-small">
+        <div class="footer-copyright text-center py-3">© 2022 Copyright: digitalMall
+        </div>  
+    </footer>
+    <script>
+        
+        var addSpCouter = parseInt(document.getElementById('sIndex').value) + 1;
+        console.log(addSpCouter);
+        const sl = document.getElementById('speslist');
+        
+        function addSpecs(){
+            if( addSpCouter <= 5 ){
+                
+                const sItem = `<div class="mb-3"><input type="text" placeholder="Specifications" name="specItem${addSpCouter}" class="form-control my-2"></div>`;
+                sl.insertAdjacentHTML('beforeend',sItem);
+                addSpCouter++;
+            }else{
+                alert(`Can't add more then five!`);
+            }
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 </body>
 
 </html>

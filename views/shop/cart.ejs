@@ -1,68 +1,76 @@
 <%- include('../includes/header.ejs') %>
-    <link rel="stylesheet" href="/css/style.css">
-    <style>
-        h1{
-            margin: 75px 15px;
-        }
-        .cartItems{
-            min-height: 250px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            padding-top: 70px;
-        }
-        .cartItems .cartItem{
-            padding: 15px;
-            background-color: rgb(231, 231, 231);
-            margin: 10px 0;
-            border-radius: 3px 3px 10px rgba(231, 231, 231 , 0.9);
-        }
-        button{
-            outline: none;
-            background-color: rgb(200, 49, 49);
-            color: #fff;
-            border: none;
-            padding: 5px;
-            cursor: pointer;
-        }
-        .callToAction{
-            font-size: large;
-        }
-        .callToAction button{
-            width: 200px;
-            height: 40px;
-            font-size: 20px;
-        }
-    </style>
+    <link rel="stylesheet" href="/css/productBootstrap.css">
+
 </head>
 <body>
     <%- include('../includes/nav.ejs') %>
     <% let total = 0 %>
     <%  if(cartItems.length > 0) { %>
-        <div class="cartItems">
+        
+
+
+
+        <div class="container pb-5 mt-n2 mt-md-n3 my-4">
+            <div class="row">
+                <div class="col-xl-9 col-md-8">
+                    <h2 class="h6 d-flex flex-wrap justify-content-between align-items-center px-4 py-3 bg-secondary"><span>Cart</span><a class="font-size-sm" href=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left" style="width: 1rem; height: 1rem;"><polyline points="15 18 9 12 15 6"></polyline></svg> </a></h2>
+
         <% cartItems.forEach( cartItem => {   total += cartItem.productId.price * cartItem.qty  %>
-            <div class="cartItem">
-                <h2><%= cartItem.productId.title %></h2>
-                <h3>Price : <%= cartItem.productId.price %>  Qty : <%= cartItem.qty %></h3>
-                <form action="/remove-from-cart" method="post">
-                    <input type="hidden" name="productId" value="<%= cartItem.productId._id %>">
-                    <button type="submit">Remove</button>
-                </form>
+            
+
+            <div class="d-sm-flex justify-content-between my-4 pb-4 border-bottom">
+                <div class="media d-block d-sm-flex text-sm-left">
+                    <a class="cart-item-thumb mx-auto mr-sm-4" href="#">
+                        <img height="200px" width="200px" src="\<%= cartItem.productId.imageUrl %>" alt="<%= cartItem.productId.title %>">
+                    </a>
+                    <div class="media-body pt-3 mx-3">
+                        <h3 class="product-card-title font-weight-semibold border-0 pb-0">
+                            <a href="#">
+                                <%= cartItem.productId.title %>
+                            </a>
+                        </h3>
+                        <div class="font-size-sm"><span class="text-muted mr-2">Price: </span> ₹<%= cartItem.productId.price %></div>
+                        <div class="font-size-sm" ><span class="text-muted mr-2">MRP: </span> ₹<%= cartItem.productId.mrp %></div>
+
+                    </div>
+                </div>
+                <div class="pt-2 pt-sm-0 pl-sm-3 mx-auto mx-sm-0 text-center text-sm-left" style="max-width: 10rem;">
+                    <div class="form-group mb-2">
+                        <label for="quantity1">Products Quntity</label>
+                        <div class="form-control form-control-sm" type="number"><%= cartItem.qty %></div>
+                    </div>
+                    
+                        <form action="/remove-from-cart" method="post">
+                            <input type="hidden" name="productId" value="<%= cartItem.productId._id %>">
+                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                            <button class="btnUrl btn btn-outline-danger btn-sm btn-block mb-2" type="submit">Remove</button>
+                        </form>
+                    
+                </div>
             </div>
-            <div class="callToAction">
-                <p>Total : <b> ₹ <%= total %> </b></p>
-                <form action="/order" method="post">
-                    <button type="submit">ORDER NOW</button>
-                </form>
-            </div>
+
+
+
+
+
         <% }) %>
+        <div class="callToAction">
+            <p>Total : <b> ₹ <%= total %> </b></p>
+            <form action="/order" method="post">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <button class="btn btn-primary" type="submit">ORDER NOW</button>
+            </form>
+        </div>
     </div>
     <% } else { %>    
-        <h1>Your Cart is Empty..</h1>
+        <h1 class="text-center my-3">Your Cart is Empty..</h1>
     <% } %>    
-    
-        
+    <footer class="page-footer font-small">
+        <div class="footer-copyright text-center py-3">© 2022 Copyright: digitalMall
+        </div>  
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script> 
     
 </body>
 </html>

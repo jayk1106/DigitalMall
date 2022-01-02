@@ -25,7 +25,7 @@ module.exports.getLogin = (req,res,next) => {
     }else{
         flashMessage = null;
     }
-    res.render('auth/login' , { errorMessage : flashMessage , oldInput : {}});
+    res.render('auth/login' , { errorMessage : flashMessage, path: 'login' , title : 'LogIn' , oldInput : {}});
 };
 
 module.exports.postLogin = (req,res,next) => {
@@ -35,7 +35,7 @@ module.exports.postLogin = (req,res,next) => {
     User.findOne({email : email})
     .then( user => {
         if(!user){
-            return  res.status(422).render('auth/login' , { errorMessage : "Invalid Email or Password" , oldInput : { email , password}});
+            return  res.status(422).render('auth/login' , { errorMessage : "Invalid Email or Password", path: 'login' , title : 'LogIn', oldInput : { email , password}});
         }
         bcrypt.compare(password , user.password)
         .then( isMatch => {
@@ -48,8 +48,8 @@ module.exports.postLogin = (req,res,next) => {
                     res.redirect('/');
                 })
             }else{
-                return  res.status(422).render('auth/login' , { errorMessage : "Invalid Email or Password" , oldInput : { email , password}});
-                res.redirect('/login');
+                return  res.status(422).render('auth/login' , { errorMessage : "Invalid Email or Password" , path: 'login' , title : 'LogIn' , oldInput : { email , password}});
+                
             }
         })
         .catch( err => {
@@ -70,13 +70,13 @@ module.exports.postSignup =  (req,res,next) => {
     let errors = validationResult(req);
     if (!errors.isEmpty()) {
         errors =  errors.array();
-        return res.status(422).render('auth/sign-up' , { errorMessage : errors[0].msg , oldInput : {name , email , password}});
+        return res.status(422).render('auth/sign-up' , { errorMessage : errors[0].msg , path: 'signup' , title : 'SignUp' , oldInput : {name , email , password}});
     }
 
     User.findOne({email : email})
     .then( user => {
         if(user){
-            return  res.status(422).render('auth/sign-up' , { errorMessage :"This Email is Already Registered" , oldInput : {name , email , password}});
+            return  res.status(422).render('auth/sign-up' , { errorMessage :"This Email is Already Registered", path: 'signup' , title : 'SignUp' , oldInput : {name , email , password}});
         }else{
             bcrypt.hash(password,12)
             .then( hashPassword => {
@@ -123,7 +123,7 @@ module.exports.getSignup = (req,res,next) => {
         flashMessage = null;
     }
 
-    res.render('auth/sign-up' , { errorMessage : flashMessage , oldInput : {}});
+    res.render('auth/sign-up' , { errorMessage : flashMessage , oldInput : {} , path : 'signup' , title : 'SignUp'});
 };
 
 
@@ -144,7 +144,7 @@ module.exports.getReset = (req,res,next) => {
     }else{
         flashMessage = null;
     }
-    res.render('auth/reset' , {errorMessage : flashMessage});
+    res.render('auth/reset' , {errorMessage : flashMessage , path : 'reset' , title : 'Reset Password'});
 }
 
 module.exports.postReset = (req,res,next) => {
@@ -205,7 +205,7 @@ module.exports.getUpdatePassword = (req,res,next) => {
         if(!user) {
             return res.redirect('/');
         }
-        res.render('auth/update-passeord' , { userId : user._id , passToken : user.resetToken});
+        res.render('auth/update-passeord' , { userId : user._id , passToken : user.resetToken , path : 'updatePassword' , title : 'Update Password'});
         
     })
     .catch( err => {

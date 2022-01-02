@@ -1,93 +1,84 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Category</title>
-    <link rel="stylesheet" href="/css/addNewProduct.css">
+<%- include('../includes/header.ejs') %>
 </head>
 
 <body>
-    <div class="container">
+    <%- include('../includes/nav.ejs') %>
+    <div class="container my-3">
+        
         <% if(editMode) { %>
+            <h1>Update Category</h1>   
+            <div class="text-danger my-2" style="height: 20px;">
+                    <% if(errorMessage) { %>
+                        <%= errorMessage %>
+                    <% } %> 
+            </div>
             <form action="/admin/update-catagory" method="post" enctype="multipart/form-data">
+                
                 <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                 <input type="hidden" value="<%= catagory._id %>" name="_id">
-                <div class="product__image">
-                    <div class="uploadOuter">
-                        <!-- <label for="uploadFile" class="btn btn-primary">Upload Image</label>
-                        <strong>OR</strong> -->
-                        <span class="dragBox" id="preview">
-                            Darg and Drop image here
-                            <input type="file"
-                                name="image" id="uploadFile" />
-                        </span>
-                    </div>
+                <div class="mb-3">
+                <label for="name" class="form-label">Category Name</label>
+                <input type="text" class="form-control" id="name" name="name" required
+                <% if(oldInput.name) { %> value="<%=oldInput.name%>" <% } %>
+                <% if(editMode) { %> value="<%=catagory.name%>" <% } %>
+                >
                 </div>
-        
-                <div class="product__details">
+                
+                <div class="mb-3">
+                   
+
+                    <% if(oldInput.description) { %> 
+                        <label for="description" class="form-label">Description</label>
+                        <textarea class="form-control" id="description" name="description" required><%=oldInput.description%></textarea>
+                    <% } %>
+                    <% if(editMode) { %>
+                        <label for="description" class="form-label">Description</label>
+                        <textarea class="form-control" id="description" name="description" required><%=catagory.description%></textarea>
+                    <% } %>
+                </div>
+                
+                <div class="mb-3 my-2">
+                    <label for="image" class="form-label" >Image</label>
+                    <input type="file" class="form-control" id="image" name="image" required>
+                </div>
+                <button type="submit" class="btn btn-primary my-2">UPDATE CAGEGORY</button>
+            </form> 
+
+        <% } else { %>
+                <h1>Add New Category</h1>   
+                <div class="text-danger my-2" style="height: 20px;">
                         <% if(errorMessage) { %>
-                        <div class="errorBox" style="color: red;"><%= errorMessage %></div>
-                        <% } %>
-                        <div class="title">
-                            <input type="text" placeholder="Catagory Name" name="name" 
-                            <% if(oldInput.name) { %> value="<%=oldInput.name%>" <% } %>
-                            <% if(editMode) { %> value="<%=catagory.name%>" <% } %>
-                            >
-                        </div>
-                        <div class="des">
-                            <% if(oldInput.description) { %> 
-                                <textarea name="description" id="" placeholder="Description"><%=oldInput.description%></textarea>
-                                <% } %>
-                                <% if(editMode) { %>
-                                    <textarea name="description" id="" placeholder="Description"><%=catagory.description%></textarea>     
-                                <% } %>
-                        </div>
-                        
-                        <div class="submit">
-                            <input type="submit" value="UPDATE CATAGORY">
-                        </div>
+                            <%= errorMessage %>
+                        <% } %> 
                 </div>
-            </form>
-        <% } else { %>    
-            <form action="/admin/add-new-catagory" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                <div class="product__image">
-                    <div class="uploadOuter">
-                        <!-- <label for="uploadFile" class="btn btn-primary">Upload Image</label>
-                        <strong>OR</strong> -->
-                        <span class="dragBox" id="preview">
-                            Darg and Drop image here
-                            <input type="file" 
-                                id="uploadFile" name="image" />
-                        </span>
-                    </div>
-                </div>
-        
-                <div class="product__details">
-                        <% if(errorMessage) { %>
-                            <div class="errorBox" style="color: red;"><%= errorMessage %></div>
-                        <% } %>
-                        <div class="title">
-                            <input type="text" placeholder="Catagory Name" name="name" <% if(oldInput.name) { %> value="<%=oldInput.name%>" <% } %> >
-                        </div>
+                <form action="/admin/add-new-catagory" method="post" enctype="multipart/form-data">
                     
-                        <div class="des">
-                            <textarea name="description" id="" placeholder="Description"><% if(oldInput.description) { %> <%=oldInput.description%> <% } %></textarea>
-                        </div>
-                        
-                       
-                        <div class="submit">
-                            <input type="submit" value="ADD NEW CATAGORY">
-                        </div>
-                </div>
-            </form>
-        <% } %>    
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+                    <div class="mb-3">
+                    <label for="name" class="form-label">Category Name</label>
+                    <input type="text" class="form-control" id="name" name="name" required <% if(oldInput.title) { %> value="<%= oldInput.title %>" <% } %> >
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea class="form-control" id="description" name="description" required><% if(oldInput.description) { %> <%= oldInput.description %> <% } %></textarea>
+                    </div>
+                    
+                    <div class="mb-3 my-2">
+                        <label for="image" class="form-label" >Image</label>
+                        <input type="file" class="form-control" id="image" name="image" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary my-2">ADD NEW CAGEGORY</button>
+                </form>
+
+        <% } %>
         
     </div>
-    <script src="/js/addNewProduct.js"></script>
+    <footer class="page-footer font-small">
+        <div class="footer-copyright text-center py-3">© 2022 Copyright: digitalMall
+        </div>  
+    </footer>
 </body>
 
 </html>

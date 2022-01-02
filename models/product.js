@@ -15,6 +15,10 @@ const productSchema = new Schema({
         type : Number,
         required : true
     },
+    quantity : {
+        type: Number,
+        required : true
+    },
     description : {
         type : String,
         required : true
@@ -25,6 +29,11 @@ const productSchema = new Schema({
     },
     specifications : {
         type : [ String ]
+    },
+    category : {
+        type : Schema.Types.ObjectId,
+        ref : 'catagory',
+        required : true
     }
 })
 

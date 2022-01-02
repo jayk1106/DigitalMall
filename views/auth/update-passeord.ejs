@@ -1,53 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Update Password</title>
-    <link rel="stylesheet" href="/css/login.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
-    <style>
-        .inputbox i{
-            position: absolute;
-            right: 70px;
-            cursor: pointer;
-        }
-    </style>
+<%- include('../includes/header.ejs') %>
 </head>
 
 <body>
-    <div class="loginform">
-        <h2>Update Password</h2>
-        <div class="formbox">
-            
-            <form method="POST" action="/update-password" id="form">
-                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                <input type="hidden" name="_id" value="<%= userId %>">
-                <input type="hidden" name="token" value="<%= passToken %>">
-                <div class="inputbox">
-                    <input type="password" name="password" placeholder="Enter Your Password" autocomplete="current-password" required id="id_password">
-                    <i class="far fa-eye" id="togglePassword"></i>
-                </div>
-                <div class="inputbox">
-                    <input type="submit" value="Update Password">
-                </div>
-            </form>
-        </div>
-    </div>
-    <script type="text/javascript">
+   
+    <section class="vh-90 gradient-custom">
+        <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+              <div class="card bg-dark text-white" style="border-radius: 1rem;">
+                <div class="card-body p-5 text-center">
+      
+                  <div class="mb-md-5 mt-md-4 pb-5">
+      
+                    <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
+                    
+                    <p class="text-white-50 mb- danger">Please enter your login password!</p>
         
-        const togglePassword = document.querySelector('#togglePassword');
-        const password = document.querySelector('#id_password');
+                    <form method="POST" action="/update-password">
 
-        togglePassword.addEventListener('click', function(e) {
-            // toggle the type attribute
-            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-            password.setAttribute('type', type);
-            // toggle the eye slash icon
-            this.classList.toggle('fa-eye-slash');
-        });
-    </script>
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                        <input type="hidden" name="_id" value="<%= userId %>">
+                        <input type="hidden" name="token" value="<%= passToken %>">
+
+                    <div class="form-outline form-white mb-4">
+                      <input type="password" id="typeEmailX" class="form-control form-control-lg" name="password" placeholder="New Password" required/>
+                    </div>
+      
+                    
+                    <button class="btn btn-outline-light btn-lg px-5" type="submit">Update Password</button>    
+                </form>
+                    <p class="mb-0 my-2">Don't have an account? <a href="/signup" class="text-white-50 fw-bold">Sign Up</a></p>
+                  </div>
+      
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    <footer class="page-footer font-small">
+        <div class="footer-copyright text-center py-3">© 2022 Copyright: digitalMall
+        </div>  
+    </footer>
+    
 </body>
 
 </html>

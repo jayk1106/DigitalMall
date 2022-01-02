@@ -2,49 +2,63 @@ const express = require('express');
 const {body} = require('express-validator');
 
 const adminController = require('../controllers/admin');
-const isAuth = require('../middleware/is-Auth');
+const isAdmin = require('../middleware/is-Admin');
 
 const router = express.Router();
 
-router.get('/products' , isAuth , adminController.getProducts);
+
+
+// Admin Auth
+
+router.get('/' , adminController.getAdminLogin );
+
+router.post('/admin_login' , adminController.postAdminLogin);
+
+
+// products
+
+router.get('/products' , isAdmin , adminController.getProducts);
 
 router.post('/add-new-product', [
-    body('title' , "Title must be alphanumeric and atleast 3 character long").isAlphanumeric().isLength({min : 3}).trim(),
+    body('title' , "Title atleast 3 character long").isLength({min : 3}).trim(),
     body('price' , "Price must be numaric").isNumeric().trim(),
     body('mrp' , "MRP must be numaric").isNumeric().trim(),
     body('description', "Description must be in range of 5 to 400 characters").isLength({min:5 , max : 400}).trim(),
-], isAuth , adminController.postAddNewProduct);
-router.get('/add-new-product', isAuth , adminController.getAddNewProduct);
+], isAdmin , adminController.postAddNewProduct);
+router.get('/add-new-product', isAdmin , adminController.getAddNewProduct);
 
 
-router.get('/update-product/:prodId' , isAuth , adminController.getUpdateProduct);
+router.get('/update-product/:prodId' , isAdmin , adminController.getUpdateProduct);
 router.post('/update-product',[
-    body('title' , "Title must be alphanumeric and atleast 3 character long").isAlphanumeric().isLength({min : 3}).trim(),
+    body('title' , "Title atleast 3 character long").isLength({min : 3}).trim(),
     body('price' , "Price must be numaric").isNumeric().trim(),
     body('mrp' , "MRP must be numaric").isNumeric().trim(),
     body('description', "Description must be in range of 5 to 400 characters").isLength({min:5 , max : 400}).trim(),
-], isAuth , adminController.postUpdateProduct);
+], isAdmin , adminController.postUpdateProduct);
 
 
-router.get('/delete-product/:prodId', isAuth , adminController.getDeleteProduct);
+router.get('/delete-product/:prodId', isAdmin , adminController.getDeleteProduct);
 
 
 // Catagories
 
-router.get('/add-new-catagory', isAuth , adminController.getAddNewCatagory);
+router.get('/add-new-catagory', isAdmin , adminController.getAddNewCatagory);
 router.post('/add-new-catagory',[
     body('name' , "Name is required").contains().trim(),
     body('description', "Description must be in range of 5 to 400 characters").isLength({min:5 , max : 400}).trim(),
-], isAuth , adminController.postAddNewCatagory);
+], isAdmin , adminController.postAddNewCatagory);
 
-router.get('/catagory', isAuth , adminController.getCatagory);
+router.get('/catagory', isAdmin , adminController.getCatagory);
 
-router.get('/update-catagory/:catId', isAuth , adminController.getUpdateCatagory);
+router.get('/update-catagory/:catId', isAdmin , adminController.getUpdateCatagory);
 router.post('/update-catagory',[
     body('name' , "Name is required").contains().trim(),
     body('description', "Description must be in range of 5 to 400 characters").isLength({min:5 , max : 400}).trim(),
-], isAuth , adminController.postUpdateCatagory);
+], isAdmin , adminController.postUpdateCatagory);
 
-router.get('/delete-catagory/:catId', isAuth , adminController.getDeleteCatagory);
+router.get('/delete-catagory/:catId', isAdmin , adminController.getDeleteCatagory);
+
+
+
 
 module.exports = router;

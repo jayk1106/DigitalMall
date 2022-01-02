@@ -12,7 +12,7 @@ const authRoutes = require("./routes/auth");
 const adminRoutes = require("./routes/admin");
 const User = require('./models/user');
 
-const MONGODB_URL = "mongodb+srv://jay:jayme143@cluster0.0a5mx.mongodb.net/digitalMall"
+const MONGODB_URL = ''; // Your MongoDb URI
 
 const app = express();
 const store = new MongodbStore({
@@ -26,13 +26,13 @@ const fileStrorage = multer.diskStorage({
     cb(null,'images');
   },
   filename : (req,file,cb)=>{
-    console.log("FileStorage : ",req.session.user._id + '-' + Date.now() + '-' +file.originalname);
+    // console.log("FileStorage : ",req.session.user._id + '-' + Date.now() + '-' +file.originalname);
     cb(null , req.session.user._id + '-' + Date.now() + '-' +file.originalname);
   }
 })
 
 const fileFilter = (req,file,cb) => {
-  console.log(file.mimetype);
+  // console.log(file.mimetype);
   if(file.mimetype === 'image/png' || file.mimetype === 'image/jpg' || file.mimetype === 'image/jpeg'){
     cb(null,true);
   }else{
@@ -57,8 +57,9 @@ app.use(flash());
 // Set locals variables that present in all views so we don't need to render every time
 app.use((req,res,next) => {
   res.locals.isAthenticated = req.session.isLoggedIn;
+  res.locals.isAdmin = req.session.isAdmin;
   res.locals.csrfToken = req.csrfToken();
-  next();
+  next(); 
 })
 
 
@@ -84,11 +85,11 @@ app.use(shopRoutes);
 app.use(authRoutes);
 
 app.use('/500' , (req,res,next) => {
-    res.status(500).render('500');
+    res.status(500).render('500' ,{ title : 'Internal Server Error' , path:'500'});
 })
 
 app.use((req,res,next)=> {
-    res.status(404).render('404');
+    res.status(404).render('404' , { title : 'Page Not Found' , path:'404'});
 })
 
 

@@ -1,132 +1,278 @@
 <%- include('../includes/header.ejs') %>
-    <link rel="stylesheet" href="/css/style.css">
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+
+h2 {
+	color: #000;
+	font-size: 26px;
+	font-weight: 300;
+	text-align: center;
+	text-transform: uppercase;
+	position: relative;
+	margin: 30px 0 60px;
+}
+h2::after {
+	content: "";
+	width: 100px;
+	position: absolute;
+	margin: 0 auto;
+	height: 4px;
+	border-radius: 1px;
+	background: #2265d1;
+	left: 0;
+	right: 0;
+	bottom: -20px;
+}
+.btn {
+	color: #2265d1;
+	font-size: 11px;
+	text-transform: uppercase;
+	font-weight: bold;
+	background: none;
+	border: 1px solid #2265d1;
+	padding: 6px 14px;
+	margin-top: 5px;
+	line-height: 16px;
+	border-radius: 20px;
+	outline: none;
+}
+.btn:hover, nav .btn:focus {
+	color: #fff;
+	background: #2265d1;
+	box-shadow: none;
+}
+.carousel {
+	margin: 0 auto;
+	padding: 0 70px;
+}
+.carousel .item {
+	color: #747d89;
+	min-height: 325px;
+	text-align: center;
+	overflow: hidden;
+}
+.carousel .thumb-wrapper {
+	padding: 25px 15px;
+	background: #fff;
+	border-radius: 6px;
+	text-align: center;
+	position: relative;
+	box-shadow: 0 2px 3px rgba(0,0,0,0.2);
+}
+.carousel .item .img-box {
+	height: 120px;
+	margin-bottom: 20px;
+	width: 100%;
+	position: relative;
+}
+.carousel .item img {	
+	max-width: 100%;
+	max-height: 100%;
+	display: inline-block;
+	position: absolute;
+	bottom: 0;
+	margin: 0 auto;
+	left: 0;
+	right: 0;
+}
+.carousel .item h4 {
+	font-size: 18px;
+}
+.carousel .item h4, .carousel .item p, .carousel .item ul {
+	margin-bottom: 5px;
+}
+
+.carousel .item-price {
+	font-size: 13px;
+	padding: 2px 0;
+}
+.carousel .item-price span {
+	opacity: 0.7;
+	margin-right: 5px;
+}
+.carousel-control-prev, .carousel-control-next {
+	height: 44px;
+	width: 40px;
+	background: #7ac400;	
+	margin: auto 0;
+	border-radius: 4px;
+	opacity: 0.8;
+}
+.carousel-control-prev:hover, .carousel-control-next:hover {
+	background: #78bf00;
+	opacity: 1;
+}
+.carousel-control-prev i, .carousel-control-next i {
+	font-size: 36px;
+	position: absolute;
+	top: 50%;
+	display: inline-block;
+	margin: -19px 0 0 0;
+	z-index: 5;
+	left: 0;
+	right: 0;
+	color: #fff;
+	text-shadow: none;
+	font-weight: bold;
+}
+.carousel-control-prev i {
+	margin-left: -2px;
+}
+.carousel-control-next i {
+	margin-right: -4px;
+}		
+.carousel-indicators {
+	bottom: -50px;
+}
+.carousel-indicators li, .carousel-indicators li.active {
+	width: 10px;
+	height: 10px;
+	margin: 4px;
+	border-radius: 50%;
+	border: none;
+}
+.carousel-indicators li {	
+	background: rgba(0, 0, 0, 0.2);
+}
+.carousel-indicators li.active {	
+	background: rgba(0, 0, 0, 0.6);
+}
+.carousel .wish-icon {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	z-index: 99;
+	cursor: pointer;
+	font-size: 16px;
+	color: #abb0b8;
+}
+.carousel .wish-icon .fa-heart {
+	color: #ff6161;
+}
+.star-rating li {
+	padding: 0;
+}
+.star-rating i {
+	font-size: 14px;
+	color: #ffc000;
+}
+
+    </style>
 </head>
 
 <body>
     <%- include('../includes/nav.ejs') %>
-    <div class="home">
-        <div class="content">
-            <h2>Order Organic</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sed sapien sit amet sem imperdiet interdum. Duis tincidunt diam eros. Sed pulvinar dolor ut arcu ornare, quis vehicula arcu sollicitudin. Aliquam in massa eget ligula pellentesque fermentum. Fusce nec fermentum magna. Mauris vestibulum, libero eget vulputate consequat, quam eros faucibus tortor, molestie luctus lacus sapien non sem. In luctus, lacus fermentum condimentum pulvinar, metus sapien eleifend metus, id tristique ligula leo vitae magna. In efficitur urna ac ante imperdiet tincidunt. </p>
-        </div>
-        <div class="image">
-            <img src="Photos/OrderOrgnic.png" alt="">
-        </div>
-    </div>
     
-    <!-- <div  id="carouselExampleIndicators" class="carousel slide slider" data-ride="carousel">
-        <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-        </ol>
-        <div class="carousel-inner">
-            <div class="carousel-item active image">
-                <img class="d-block w-100 width" src="Photos/Slider2.jpg" alt="First slide">
-            </div>
-            <div class="carousel-item image">
-                <img class="d-block w-100 width" src="Photos/Slider3.jpg" alt="Second slide">
-            </div>
-            <div class="carousel-item image">
-                <img class="d-block w-100 width" src="Photos/Slider1.jpg" alt="Third slide">
-            </div>
-        </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
-    </div> -->
-    
-    <div class="cat">
-        <h3>Latest Products</h3>
-    </div>
-    
-    <div class="products">
-        <!-- <?php
-    
-        include 'config.php';
-    
-        $sql = "SELECT * FROM product ORDER BY pro_id DESC LIMIT 4";
-        $result = mysqli_query($conn, $sql) or die("Query Un");
-        if (mysqli_num_rows($result) > 0) {
-            while ($row = mysqli_fetch_assoc($result)) {
-        ?>
-                <div class="proCard">
-                    <img src="Admin/Uploads/Products/<?php echo $row['pro_image']; ?>" alt="">
-                    <h5><?php echo $row['pro_name']; ?></h5>
-                    <button><a href="product.php?id=<?php echo $row['pro_id']; ?>">SHOW</a></button>
-                </div>
-        <?php
-            }
-        }
-        ?> -->
 
-        <% if(products.length > 0) { %>
-            <% products.forEach(product => { %>
-                <div class="proCard">
-                    <img src="<%= product.imageUrl %>" alt="">
-                    <h5><%= product.title %></h5>
-                    <button><a href="/product/<%= product._id %>">LEARN MORE</a></button>
+	<div class="container-xl">
+    <%  if(categories.length > 0) { %>
+		
+			<div class="row">
+				<div class="col-md-12">
+        <h2>Categories</h2>
+        <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
+        <!-- Carousel indicators -->
+           
+        <!-- Wrapper for carousel items -->
+        <div class="carousel-inner">
+            <div class="item carousel-item active">
+                <div class="row">
+
+                    <% categories.forEach( category => {  %>
+                        <div class="col-sm-3">
+                            <div class="thumb-wrapper">
+                                
+                                <div class="img-box">
+                                    <img src="\<%= category.imageUrl %>" class="img-fluid" alt="">									
+                                </div>
+                                <div class="thumb-content">
+                                    <h4><%= category.name %></h4>									
+                                    <a href="/category/<%= category._id %>" class="btn btn-primary">View Products</a>
+                                </div>						
+                            </div>
+                        </div>
+                    <% }) %>   
                 </div>
-            <% }); %>
-        <% } else { %>
-            <h2>No products Found!!</h2>
-        <% } %>    
+            </div>
+        </div>   
+	</div>
+</div>
+</div> 
+<div class="container d-flex justify-content-center align-items-center">
+	<a href="/category" class="text-center btn btn-primary">View More</a>
+</div>
+    <% } else { %>   
+        <h2>No Categories Found!</h2>
+    <% } %>    
+	</div>
         
-        
-    </div>
-    <div class="cat">
-        <h3>Category:</h3>
-    </div>
+
+
+
+
     
-    <div class="category" id="category">
-        <!-- <?php
-    
-        include 'config.php';
-    
-        $sql2 = "SELECT * FROM category";
-        $result2 = mysqli_query($conn, $sql2) or die("Query Un");
-        if (mysqli_num_rows($result2) > 0) {
-            while ($row2 = mysqli_fetch_assoc($result2)) {
-    
-        ?>
-                <div class="card">
-                    <img src="Admin/Uploads/<?php echo $row2['cat_image']; ?>" alt="">
-                    <h4><?php echo $row2['cat_name']; ?></h4>
-                    <p><?php echo $row2['cat_des']; ?></p>
-                    <button><a href="category.php?id=<?php echo $row2['cat_id']; ?>">Read More</a></button>
+   
+    <div class="container-xl">
+    <%  if(products.length > 0) { %>
+		
+		<div class="row">
+            <div class="col-md-12">
+        <h2>Featured <b>Products</b></h2>
+        <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
+        <!-- Carousel indicators -->
+           
+        <!-- Wrapper for carousel items -->
+        <div class="carousel-inner">
+            <div class="item carousel-item active">
+                <div class="row">
+
+                    <% products.forEach( product => {  %>
+                        <div class="col-sm-3">
+                            <div class="thumb-wrapper">
+                                <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
+                                <div class="img-box">
+                                    <img src="\<%= product.imageUrl %>" class="img-fluid" alt="">									
+                                </div>
+                                <div class="thumb-content">
+                                    <h4><%= product.title %></h4>									
+                                    <div class="star-rating">
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                            <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                        </ul>
+                                    </div>
+                                    <p class="item-price"><span>₹<%= product.mrp %></span> <b>₹<%= product.price %></b></p>
+                                    <a href="/product/<%= product._id %>" class="btn btn-primary">Details</a>
+                                </div>						
+                            </div>
+                        </div>
+                    <% }) %>   
                 </div>
-        <?php
-            }
-        }
-        ?> -->
-    </div>
-    <footer>
-        <h2>ORDER ORGANIC</h2>
-        <p class="bo">© 2021 OrderOrganic.com<br>
-        <a href="contact.php">Contact Us</a> <a href="">Disclaimer</a><br>
-        </p>
-    </footer>
-    <script type="text/javascript">
-        const menubtn = document.querySelector('.menu-btn');
-        let menuOpen = false;
-        menubtn.addEventListener('click', () => {
-            if (!menuOpen) {
-                menubtn.classList.add('open');
-                menuOpen = true;
-            } else {
-                menubtn.classList.remove('open');
-                menuOpen = false;
-            }
-        });
-    </script>
+            </div>
+        </div>    
+	</div>
+</div>
+</div>
+<div class="container d-flex justify-content-center align-items-center">
+	<a href="/products" class="text-center btn btn-primary">View More</a>
+</div>
+    <% } else { %>   
+        <h2>No Product Found!</h2>
+    <% } %>    
+		</div>       
+    
+
+<footer class="page-footer font-small">
+	<div class="footer-copyright text-center py-3">© 2022 Copyright: digitalMall
+	</div>  
+</footer>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    
 </body>
 </html>
